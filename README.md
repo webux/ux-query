@@ -1,2 +1,2 @@
-ux-query
+Angular Query Selector
 ========
