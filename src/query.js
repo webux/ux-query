@@ -2,7 +2,7 @@
  * Author: Robert Taylor
  * Date: 8/30/13
  */
-
+/*global ux */
 (function () {
     'use strict';
 
@@ -20,7 +20,7 @@
             }
 
             // Return false if our element is invisible
-            if (css(el, 'opacity') === 0 || css(el, 'display') === 'none' || css('visibility', 'hidden')) {
+            if (this.css(el, 'opacity') === 0 || this.css(el, 'display') === 'none' || this.css('visibility', 'hidden')) {
                 return false;
             }
 
@@ -28,7 +28,7 @@
             return true;
         }
         return false;
-    }
+    };
 
     ux.query.fn.isChecked = function () {
         var el = this.first();
@@ -36,7 +36,7 @@
             return el.checked;
         }
         return false;
-    }
+    };
 
     ux.query.fn.selected = function () {
         var el = this.first();
@@ -44,6 +44,6 @@
             return el[0].options[el[0].selectedIndex];
         }
         return undefined;
-    }
+    };
 
 }());

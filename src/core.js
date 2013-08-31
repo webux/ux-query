@@ -13,7 +13,7 @@
                 if (selector.substr(0, 1) === '<') {
                     parseHTML(selector);
                 } else {
-                    parseSelector(selector)
+                    parseSelector(selector);
                 }
             } else if (selector instanceof Array) {
                 parseArray(selector);
@@ -36,7 +36,7 @@
             } else if (context instanceof Query) {
                 scope.context = context[0];
             }
-            nodes = scope.context.querySelectorAll(selector)
+            nodes = scope.context.querySelectorAll(selector);
             len = nodes.length;
             i = 0;
             while (i < len) {
@@ -71,7 +71,7 @@
         if (this.length) {
             return this[0].outerHTML;
         }
-    }
+    };
 
     q.each = function (fn) {
         var i = 0, len = this.length, result;
@@ -83,12 +83,15 @@
             i += 1;
         }
         return this;
-    }
+    };
+
 
     function query(selector, context) {
         for (var n in query.fn) {
-            Query.prototype[n] = query.fn[n];
-            delete query.fn[n];
+            if(query.fn.hasOwnProperty(n)) {
+                Query.prototype[n] = query.fn[n];
+                delete query.fn[n];
+            }
         }
         return new Query(selector, context);
     }

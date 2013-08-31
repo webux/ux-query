@@ -2,7 +2,7 @@
  * Author: Robert Taylor
  * Date: 8/30/13
  */
-
+/* global ux */
 (function () {
     'use strict';
 
@@ -10,12 +10,12 @@
         this.each(function (el) {
             el.addEventListener(event, handler);
         });
-    }
+    };
 
     ux.query.fn.unbind = function (event, handler) {
         this.each(function (el) {
             el.removeEventListener(event, handler);
-        })
-    }
+        });
+    };
 
 }());

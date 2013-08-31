@@ -2,7 +2,7 @@
  * Author: Robert Taylor
  * Date: 8/30/13
  */
-
+/*global angular, ux */
 (function () {
     'use strict';
     var module;
