@@ -62,18 +62,18 @@ function Query(selector, context) {
     init();
 }
 
-var q = Query.prototype = Object.create(Array.prototype);
+Query.prototype = Object.create(Array.prototype);
 
-q.version = '0.1';
-q.selector = '';
+Query.prototype.version = '0.1';
+Query.prototype.selector = '';
 
-q.toString = function () {
+Query.prototype.toString = function () {
     if (this.length) {
         return this[0].outerHTML;
     }
 };
 
-q.each = function (fn) {
+Query.prototype.each = function (fn) {
     var i = 0, len = this.length, result;
     while (i < len) {
         result = fn(this[i]);
@@ -85,8 +85,7 @@ q.each = function (fn) {
     return this;
 };
 
-
-function query(selector, context) {
+exports.query = function query(selector, context) {
     for (var n in query.fn) {
         if (query.fn.hasOwnProperty(n)) {
             Query.prototype[n] = query.fn[n];
@@ -94,9 +93,6 @@ function query(selector, context) {
         }
     }
     return new Query(selector, context);
-}
+};
 
-query.fn = {};
-
-window.ux = window.ux || {};
-window.ux.query = query;
+exports.query.fn = {};

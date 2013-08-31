@@ -4,7 +4,7 @@
 * License: MIT.
 */
 (function(exports, global) {
-    global["ux.query"] = exports;
+    global["ux"] = exports;
     function Query(selector, context) {
         var i = 0, len, nodes, scope = this;
         function init() {
@@ -56,15 +56,15 @@
         }
         init();
     }
-    var q = Query.prototype = Object.create(Array.prototype);
-    q.version = "0.1";
-    q.selector = "";
-    q.toString = function() {
+    Query.prototype = Object.create(Array.prototype);
+    Query.prototype.version = "0.1";
+    Query.prototype.selector = "";
+    Query.prototype.toString = function() {
         if (this.length) {
             return this[0].outerHTML;
         }
     };
-    q.each = function(fn) {
+    Query.prototype.each = function(fn) {
         var i = 0, len = this.length, result;
         while (i < len) {
             result = fn(this[i]);
@@ -75,7 +75,7 @@
         }
         return this;
     };
-    function query(selector, context) {
+    exports.query = function query(selector, context) {
         for (var n in query.fn) {
             if (query.fn.hasOwnProperty(n)) {
                 Query.prototype[n] = query.fn[n];
@@ -83,10 +83,8 @@
             }
         }
         return new Query(selector, context);
-    }
-    query.fn = {};
-    window.ux = window.ux || {};
-    window.ux.query = query;
+    };
+    exports.query.fn = {};
     ux.query.fn.append = function(element) {
         if (typeof element === "string") {
             element = ux.query(element);

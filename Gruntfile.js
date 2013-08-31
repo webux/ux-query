@@ -24,7 +24,7 @@ module.exports = function (grunt) {
                     preserveComments: 'some',
                     beautify: true,
                     banner: '<%= banner %>',
-                    wrap: '<%= pkg.moduleName %>'
+                    wrap: '<%= pkg.packageName %>'
                 },
                 files: {
                     'build/<%= pkg.filename %>.js': ['src/*.js']
@@ -33,7 +33,7 @@ module.exports = function (grunt) {
             build_min: {
                 options: {
                     report: 'gzip',
-                    wrap: '<%= pkg.moduleName %>',
+                    wrap: '<%= pkg.packageName %>',
                     banner: '<%= banner %>'
                 },
                 files: {
@@ -46,7 +46,7 @@ module.exports = function (grunt) {
                     compress: false,
                     preserveComments: 'some',
                     beautify: true,
-                    wrap: '<%= pkg.moduleName %>',
+                    wrap: '<%= pkg.packageName %>',
                     banner: '<%= banner %>'
                 },
                 files: {
@@ -56,7 +56,7 @@ module.exports = function (grunt) {
             build_ng_min: {
                 options: {
                     report: 'gzip',
-                    wrap: '<%= pkg.moduleName %>',
+                    wrap: '<%= pkg.packageName %>',
                     banner: '<%= banner %>'
                 },
                 files: {
