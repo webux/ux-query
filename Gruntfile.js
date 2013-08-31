@@ -31,6 +31,20 @@ module.exports = function (grunt) {
                 files: {
                     'build/<%= pkg.filename %>.min.js': ['src/*.js']
                 }
+            },
+            build_ng_min: {
+                options: {
+                    report: 'gzip',
+                    wrap: true,
+                    banner: '/*\n' +
+                        '* <%= pkg.name %> v.<%= pkg.version %>\n' +
+                        '* (c) ' + new Date().getFullYear() + ', WebUX\n' +
+                        '* License: MIT.\n' +
+                        '*/\n'
+                },
+                files: {
+                    'build/angular-<%= pkg.filename %>.min.js': ['src/*.js', 'src/frameworks/angular.js']
+                }
             }
         },
         compress: {
