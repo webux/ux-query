@@ -2,7 +2,7 @@
  * Copyright 2013, WebUX
  * License: MIT
  */
-/* global angular, ux */
+/*global angular, ux */
 var module;
 try {
     module = angular.module('ux');

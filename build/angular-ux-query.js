@@ -360,6 +360,15 @@
             }
         });
     };
+    var module;
+    try {
+        module = angular.module("ux");
+    } catch (e) {
+        module = angular.module("ux", []);
+    }
+    module.factory("$query", function() {
+        return ux.query;
+    });
 })({}, function() {
     return this;
 }());

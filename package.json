@@ -2,6 +2,7 @@
     "name": "uxQuery",
     "version": "0.1.0",
     "filename": "ux-query",
+    "moduleName": "ux.query",
     "dependencies": {},
     "devDependencies": {
         "grunt": "~0.4.1",

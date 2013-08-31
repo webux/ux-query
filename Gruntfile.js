@@ -1,6 +1,21 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        banner: '/*\n' +
+            '* <%= pkg.name %> v.<%= pkg.version %>\n' +
+            '* (c) ' + new Date().getFullYear() + ', WebUX\n' +
+            '* License: MIT.\n' +
+            '*/\n',
+        jshint: {
+            // define the files to lint
+            files: ['src/**/*.js'],
+            // configure JSHint (documented at http://www.jshint.com/docs/)
+            options: {
+                // more options here if you want to override JSHint defaults
+                globals: {
+                }
+            }
+        },
         uglify: {
             build: {
                 options: {
@@ -8,11 +23,8 @@ module.exports = function (grunt) {
                     compress: false,
                     preserveComments: 'some',
                     beautify: true,
-                    banner: '/*\n' +
-                        '* <%= pkg.name %> v.<%= pkg.version %>\n' +
-                        '* (c) ' + new Date().getFullYear() + ', WebUX\n' +
-                        '* License: MIT.\n' +
-                        '*/\n'
+                    banner: '<%= banner %>',
+                    wrap: '<%= pkg.moduleName %>'
                 },
                 files: {
                     'build/<%= pkg.filename %>.js': ['src/*.js']
@@ -21,26 +33,31 @@ module.exports = function (grunt) {
             build_min: {
                 options: {
                     report: 'gzip',
-                    wrap: true,
-                    banner: '/*\n' +
-                        '* <%= pkg.name %> v.<%= pkg.version %>\n' +
-                        '* (c) ' + new Date().getFullYear() + ', WebUX\n' +
-                        '* License: MIT.\n' +
-                        '*/\n'
+                    wrap: '<%= pkg.moduleName %>',
+                    banner: '<%= banner %>'
                 },
                 files: {
                     'build/<%= pkg.filename %>.min.js': ['src/*.js']
                 }
             },
+            build_ng: {
+                options: {
+                    mangle: false,
+                    compress: false,
+                    preserveComments: 'some',
+                    beautify: true,
+                    wrap: '<%= pkg.moduleName %>',
+                    banner: '<%= banner %>'
+                },
+                files: {
+                    'build/angular-<%= pkg.filename %>.js': ['src/*.js', 'src/frameworks/angular.js']
+                }
+            },
             build_ng_min: {
                 options: {
                     report: 'gzip',
-                    wrap: true,
-                    banner: '/*\n' +
-                        '* <%= pkg.name %> v.<%= pkg.version %>\n' +
-                        '* (c) ' + new Date().getFullYear() + ', WebUX\n' +
-                        '* License: MIT.\n' +
-                        '*/\n'
+                    wrap: '<%= pkg.moduleName %>',
+                    banner: '<%= banner %>'
                 },
                 files: {
                     'build/angular-<%= pkg.filename %>.min.js': ['src/*.js', 'src/frameworks/angular.js']
@@ -60,10 +77,11 @@ module.exports = function (grunt) {
     });
 
     // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-compress');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify', 'compress']);
+    grunt.registerTask('default', ['jshint', 'uglify', 'compress']);
 
 };
