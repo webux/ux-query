@@ -11,9 +11,9 @@
         function init() {
             if (typeof selector === 'string') {
                 if (selector.substr(0, 1) === '<') {
-                    parseHTMLString(selector);
+                    parseHTML(selector);
                 } else {
-                    parseSelectorString(selector)
+                    parseSelector(selector)
                 }
             } else if (selector instanceof Array) {
                 parseArray(selector);
@@ -22,13 +22,13 @@
             }
         }
 
-        function parseHTMLString(html) {
+        function parseHTML(html) {
             var container = document.createElement('div');
             container.innerHTML = html;
             scope.push(container.firstElementChild);
         }
 
-        function parseSelectorString(selector) {
+        function parseSelector(selector) {
             scope.selector = selector;
 
             if (context instanceof Element) {
@@ -85,14 +85,10 @@
         return this;
     }
 
-    var setup = false;
     function query(selector, context) {
-        if(!setup) {
-            console.log('whois', query.fn);
-            for(var n in query.fn) {
-                Query.prototype[n] = query.fn[n];
-            }
-            setup = true;
+        for (var n in query.fn) {
+            Query.prototype[n] = query.fn[n];
+            delete query.fn[n];
         }
         return new Query(selector, context);
     }
