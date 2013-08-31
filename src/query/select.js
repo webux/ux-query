@@ -9,14 +9,14 @@
         if (this.length) {
             return ux.query(this[0]);
         }
-        return null;
+        return ux.query([]);
     }
 
     ux.query.fn.last = function () {
         if (this.length) {
             return ux.query(this[this.length - 1]);
         }
-        return null;
+        return ux.query([]);
     }
 
     ux.query.fn.find = function (selector) {
