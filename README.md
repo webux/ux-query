@@ -1,4 +1,4 @@
-ux-Query
+Query
 ========
 
 A very lightweight DOM query selector and modifier (~4Kb minified). Works well as an alternative to heavier DOM selection libraries, such as jQuery, Zepto, HTML.js, Sizzle, and other similar libraries.
@@ -8,7 +8,11 @@ A very lightweight DOM query selector and modifier (~4Kb minified). Works well a
 **Constructor**
 
 	var queryNodes = ux.query(selector);
-	
+
+**DOM Ready**
+
+	ux.query.ready(handler);	
+
 **DOM Selectors**
 
 - **first** () - Returns the first matching DOM element

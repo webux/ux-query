@@ -2,12 +2,16 @@
  * Author: Robert Taylor
  * Date: 8/29/13
  */
-
+/*global angular, ux, console, $ */
 (function () {
     'use strict';
     var module = angular.module('app', ['ux']);
 
     module.controller('MainCtrl', function ($scope, $query) {
+
+        ux.query.ready(function(){
+            console.log('DOM is ready');
+        });
 
         var rootEl = $query('<div><div class="active">Hello world</div><div>Goodbye</div></div>');
 
