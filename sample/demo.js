@@ -1,7 +1,3 @@
-/**
- * Author: Robert Taylor
- * Date: 8/29/13
- */
 /*global angular, ux, console, $ */
 (function () {
     'use strict';

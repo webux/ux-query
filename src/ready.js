@@ -2,7 +2,7 @@
  * Copyright 2013, WebUX
  * Licensed under the MIT license.
  * https://github.com/webux/ux-query/blob/master/LICENSE
- * @author - Robert Taylor
+ * @author Robert Taylor
  *
  * Copyright 2010, John Resig
  * Dual licensed under the MIT or GPL Version 2 licenses.

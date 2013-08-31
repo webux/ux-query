@@ -1,6 +1,8 @@
-/**
- * Author: Robert Taylor
- * Date: 8/30/13
+/*
+ * Copyright 2013, WebUX
+ * Licensed under the MIT license.
+ * https://github.com/webux/ux-query/blob/master/LICENSE
+ * @author Robert Taylor
  */
 
 (function () {
