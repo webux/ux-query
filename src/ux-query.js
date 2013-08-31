@@ -310,7 +310,7 @@
      }
 
     function query(selector, context) {
-        return new Query(selector, context);
+        return new Query(selector, ontext);
     }
 
     window.ux = window.ux || {};
