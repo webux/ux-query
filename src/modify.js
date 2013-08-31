@@ -116,11 +116,17 @@
 
     ux.query.fn.attr = function (prop, value) {
         if (arguments.length > 2) {
-            this.each(function(el){
+            this.each(function (el) {
                 el.setAttribute(prop, value);
             });
         }
-        return this;
+        if (this.length) {
+            return this[0].getAttribute(prop);
+        }
+    };
+
+    ux.query.fn.data = function (prop, value) {
+        return this.attr('data-' + prop, value);
     };
 
     ux.query.fn.text = function (val) {

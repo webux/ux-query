@@ -37,6 +37,8 @@
                 scope.context = context;
             } else if (context instanceof Query) {
                 scope.context = context[0];
+            } else {
+                scope.context = document;
             }
             nodes = scope.context.querySelectorAll(selector);
             len = nodes.length;

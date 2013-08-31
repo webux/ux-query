@@ -8,6 +8,20 @@
         ux.query.ready(function(){
             console.log('DOM is ready');
         });
+        var rootEl = $query('#root');
+        console.log('rootEl', rootEl);
+
+        var clickHandler = function(evt){
+            console.log('click here', evt);
+//            rootEl.off('click', clickHandler);
+//            rootEl.isSubscribed('click', clickHandler);
+            rootEl.off('click');
+//            rootEl.isSubscribed('click', clickHandler);
+        };
+        rootEl.on('click', clickHandler);
+        rootEl.on('click', clickHandler);
+
+        return;
 
         var rootEl = $query('<div><div class="active">Hello world</div><div>Goodbye</div></div>');
 
