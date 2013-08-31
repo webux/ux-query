@@ -3,9 +3,11 @@
  * License: MIT
  */
 /*global ux */
-ux.query.fn.isVisible = function () {
-    var el = this.first();
-    if (el) {
+var fn = ux.query.fn;
+fn.isVisible = function () {
+    var el;
+    if (this.length) {
+        el = this[0];
         // Return true for document node
         if (el.parentNode.nodeType === 9) {
             return true;
@@ -27,23 +29,33 @@ ux.query.fn.isVisible = function () {
     return false;
 };
 
-ux.query.fn.isChecked = function () {
-    var el = this.first();
-    if (el) {
-        return el.checked;
+fn.isChecked = function () {
+    if (this.length) {
+        return this[0].checked;
     }
     return false;
 };
 
-ux.query.fn.selected = function () {
-    var el = this.first();
-    if (el) {
-        return el[0].options[el[0].selectedIndex];
+fn.val = function (value) {
+    var el, result, i, len, options;
+    if (this.length) {
+        el = this[0];
+        if (arguments.length) {
+            el.value = value;
+        } else {
+            if (el.nodeName === 'SELECT' && el.multiple) {
+                result = [];
+                i = 0;
+                options = el.options;
+                len = options.length;
+                while (i < len) {
+                    if (options) {
+                        result.push(options[i].value || options[0].text);
+                    }
+                }
+                return result.length === 0 ? null : result;
+            }
+            return el.value;
+        }
     }
-    return undefined;
-};
-
-//    https://github.com/angular/angular.js/blob/master/src/jqLite.js
-ux.query.fn.val = function () {
-
 };

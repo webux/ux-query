@@ -3,7 +3,8 @@
  * License: MIT
  */
 /* global ux */
-ux.query.fn.bind = ux.query.fn.on = function (event, handler) {
+var fn = ux.query.fn;
+fn.bind = fn.on = function (event, handler) {
     this.each(function (el) {
         if (el.attachEvent) {
             el['e' + event + handler] = handler;
@@ -22,7 +23,7 @@ ux.query.fn.bind = ux.query.fn.on = function (event, handler) {
     });
 };
 
-ux.query.fn.unbind = ux.query.fn.off = function (event, handler) {
+fn.unbind = fn.off = function (event, handler) {
     if (arguments.length === 1) {
         this.unbindAll(event);
     } else {
@@ -37,7 +38,7 @@ ux.query.fn.unbind = ux.query.fn.off = function (event, handler) {
     }
 };
 
-ux.query.fn.unbindAll = function (event) {
+fn.unbindAll = function (event) {
     var scope = this;
     this.each(function (el) {
         if (el.eventHolder) {

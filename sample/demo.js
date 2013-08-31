@@ -5,13 +5,35 @@
 
     module.controller('MainCtrl', function ($scope, $query) {
 
-        ux.query.ready(function(){
-            console.log('DOM is ready');
+//        ux.query.ready(function () {
+//            console.log('DOM is ready');
+//        });
+
+        $query('#btnGet').on('click', function () {
+            console.log('click', $query('#input').val());
         });
+
+        $query('#btnSet').on('click', function () {
+            $query('#input').val('Hello');
+        });
+
+        $query('#btnAppend').on('click', function () {
+            // This does not work
+            $query('#root').append('append');
+//            $query('#root').append('<div>Append new item</div>');
+        });
+
+        $query('#btnPrepend').on('click', function () {
+            $query('#root').prepend('<div>Prepend new item</div>');
+        });
+
+        return;
+
+
         var rootEl = $query('#root');
         console.log('rootEl', rootEl);
 
-        var clickHandler = function(evt){
+        var clickHandler = function (evt) {
             console.log('click here', evt);
 //            rootEl.off('click', clickHandler);
 //            rootEl.isSubscribed('click', clickHandler);

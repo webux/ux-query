@@ -37,7 +37,7 @@ module.exports = function (grunt) {
                     banner: '<%= banner %>'
                 },
                 files: {
-                    'build/<%= pkg.filename %>.min.js': ['src/*.js']
+                    'build/<%= pkg.filename %>.min.js': ['build/<%= pkg.filename %>.js']
                 }
             },
             build_ng: {
@@ -50,17 +50,16 @@ module.exports = function (grunt) {
                     banner: '<%= banner %>'
                 },
                 files: {
-                    'build/angular-<%= pkg.filename %>.js': ['src/*.js', 'src/frameworks/angular.js']
+                    'build/angular-<%= pkg.filename %>.js': ['src/*.js']
                 }
             },
             build_ng_min: {
                 options: {
                     report: 'gzip',
-                    wrap: '<%= pkg.packageName %>',
                     banner: '<%= banner %>'
                 },
                 files: {
-                    'build/angular-<%= pkg.filename %>.min.js': ['src/*.js', 'src/frameworks/angular.js']
+                    'build/angular-<%= pkg.filename %>.min.js': ['build/angular-<%= pkg.filename %>.js']
                 }
             }
         },

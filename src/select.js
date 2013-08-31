@@ -3,30 +3,43 @@
  * License: MIT
  */
 /*global ux */
-ux.query.fn.first = function () {
+var fn = ux.query.fn;
+fn.first = function (returnElement) {
     if (this.length) {
+        if (returnElement) {
+            return this[0];
+        }
         return ux.query(this[0]);
     }
-    return ux.query([]);
+    if (returnElement) {
+        return null;
+    }
+    return ux.query();
 };
 
-ux.query.fn.last = function () {
+fn.last = function (returnElement) {
     if (this.length) {
+        if (returnElement) {
+            return this[this.length - 1];
+        }
         return ux.query(this[this.length - 1]);
     }
-    return ux.query([]);
+    if (returnElement) {
+        return null;
+    }
+    return ux.query();
 };
 
-ux.query.fn.find = function (selector) {
+fn.find = function (selector) {
     if (this.length) {
-        return ux.query(selector, this.first());
+        return ux.query(selector, this[0]);
     }
-    return ux.query([]);
+    return ux.query();
 };
 
-ux.query.fn.not = function (selector) {
+fn.not = function (selector) {
     if (this.length) {
-        return ux.query(':not(' + selector + ')', this.first());
+        return ux.query(':not(' + selector + ')', this[0]);
     }
-    return ux.query([]);
+    return ux.query();
 };

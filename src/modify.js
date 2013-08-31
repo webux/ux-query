@@ -3,60 +3,11 @@
  * License: MIT
  */
 /*global ux */
-ux.query.fn.append = function (element) {
-
-    if (typeof element === 'string') {
-        element = ux.query(element);
-    }
-
-    if (element instanceof Array) {
-        if (element.length) {
-            element = element[0];
-        }
-    }
-
-    if (element instanceof Element) {
-        this.each(function (el) {
-            el.appendChild(element);
-        });
-    }
-};
-
-ux.query.fn.prepend = function (element) {
-    if (typeof element === 'string') {
-        element = ux.query(element);
-    }
-
-    if (element instanceof Array) {
-        if (element.length) {
-            element = element[0];
-        }
-    }
-
-    if (element instanceof Element) {
-        this.each(function (el) {
-            el.insertBefore(element, el);
-        });
-    }
-};
-
-ux.query.fn.remove = function () {
-    this.each(function (el) {
-        if (el.parentElement) {
-            el.parentElement.removeChild(el);
-        }
-    });
-};
-
-ux.query.fn.empty = function () {
-    this.each(function (el) {
-        el.innerHTML = null;
-    });
-};
-
-ux.query.fn.css = function (prop, value) {
-    var el = this.first(), styleValue;
-    if (el) {
+var fn = ux.query.fn;
+fn.css = function (prop, value) {
+    var el, styleValue;
+    if (this.length) {
+        el = this[0];
         if (arguments.length > 1) {
             this.each(function (el) {
                 el.style[prop] = value;
@@ -72,7 +23,7 @@ ux.query.fn.css = function (prop, value) {
     return null;
 };
 
-ux.query.fn.addClass = function (className) {
+fn.addClass = function (className) {
     this.each(function (el) {
         if (!this.hasClass(el, className)) {
             el.className += ' ' + className;
@@ -81,16 +32,17 @@ ux.query.fn.addClass = function (className) {
     return this;
 };
 
-ux.query.fn.hasClass = function (className) {
-    var el = this.first();
-    if (el) {
+fn.hasClass = function (className) {
+    var el;
+    if (this.length) {
+        el = this[0];
         var elClasses = ' ' + el.className + ' ';
         return (elClasses.indexOf(className) >= 0);
     }
     return false;
 };
 
-ux.query.fn.removeClass = function (className) {
+fn.removeClass = function (className) {
     this.each(function (el) {
         var newClass = ' ' + el.className.replace(/[\t\r\n]/g, ' ') + ' ';
         if (this.hasClass(el, className)) {
@@ -103,14 +55,14 @@ ux.query.fn.removeClass = function (className) {
     return this;
 };
 
-ux.query.fn.removeAttr = function (prop) {
+fn.removeAttr = function (prop) {
     this.each(function (el) {
         el.removeAttribute(prop);
     });
     return this;
 };
 
-ux.query.fn.attr = function (prop, value) {
+fn.attr = function (prop, value) {
     if (arguments.length > 2) {
         this.each(function (el) {
             el.setAttribute(prop, value);
@@ -121,13 +73,13 @@ ux.query.fn.attr = function (prop, value) {
     }
 };
 
-ux.query.fn.data = function (prop, value) {
+fn.data = function (prop, value) {
     return this.attr('data-' + prop, value);
 };
 
-ux.query.fn.text = function (val) {
-    var el = this.first();
-    if (el) {
+fn.text = function (val) {
+    if (this.length) {
+        el = this[0];
         if (arguments.length > 0) {
             this.each(function (el) {
                 el.innerText = val;
@@ -137,9 +89,9 @@ ux.query.fn.text = function (val) {
     }
 };
 
-ux.query.fn.html = function (val) {
-    var el = this.first();
-    if (el) {
+fn.html = function (val) {
+    if (this.length) {
+        el = this[0];
         if (arguments.length > 0) {
             this.each(function (el) {
                 el.innerHTML = val;
