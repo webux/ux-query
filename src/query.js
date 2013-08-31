@@ -1,8 +1,6 @@
 /*
  * Copyright 2013, WebUX
- * Licensed under the MIT license.
- * https://github.com/webux/ux-query/blob/master/LICENSE
- * @author Robert Taylor
+ * License: MIT
  */
 /*global ux */
 (function () {
@@ -46,6 +44,11 @@
             return el[0].options[el[0].selectedIndex];
         }
         return undefined;
+    };
+
+//    https://github.com/angular/angular.js/blob/master/src/jqLite.js
+    ux.query.fn.val = function(){
+
     };
 
 }());

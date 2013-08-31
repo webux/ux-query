@@ -1,8 +1,6 @@
 /*
  * Copyright 2013, WebUX
- * Licensed under the MIT license.
- * https://github.com/webux/ux-query/blob/master/LICENSE
- * @author Robert Taylor
+ * License: MIT
  */
 /* global ux */
 (function () {
