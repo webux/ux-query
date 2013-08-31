@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content=""/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ng-controller="MainCtrl">
+<input type="text" style="text-transform: uppercase"/>
+
+<div>
+    <div id="root" style="width: 100%">
+        <div title="B">B</div>
+        <div title="A" class="active">A</div>
+        <div title="C" class="active">C</div>
+    </div>
+    <div>
+        <div class="active">Link 1</div>
+        <div>Link 2</div>
+        <div>Link 3</div>
+    </div>
+    <div>
+        <div class="focus"></div>
+        <div data-shortcut="CTRL+Q"></div>
+        <div shortcut="CTRL+S"></div>
+    </div>
+    <div title="B">B</div>
+    <div title="A" class="active">A</div>
+    <div title="C" class="active">C</div>
+</div>
+<script src="../lib/jquery.min.js"></script>
+<script src="../lib/angular.js"></script>
+<!--<script src="../src/query/ux-query.js"></script>-->
+<script src="../src/query/core.js"></script>
+<script src="../src/query/modify.js"></script>
+<script src="../src/query/query.js"></script>
+<script src="../src/query/select.js"></script>
+<script src="../src/query/subscribe.js"></script>
+<script src="../src/query/plugins/angular.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>
