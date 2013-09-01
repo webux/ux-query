@@ -12,7 +12,6 @@
             margin: 10px;
         }
     </style>
-    <!--<script src="../build/ux-query.js"></script>-->
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
 <body>
@@ -39,9 +38,9 @@
 </div>
 <script>
     $("*", document.body).each(function (index, el) {
-        console.log('el', this);
-//        var parentTag = $(this).parent().get(0).tagName;
-//        $(this).prepend(document.createTextNode(parentTag + " > "));
+        var parentTag = $(this).parent().get(0).tagName;
+        console.log('parentTag', parentTag);
+        $(this).prepend(document.createTextNode(parentTag + " > "));
     });
 </script>
 

@@ -2,10 +2,10 @@
  * Copyright 2013, WebUX
  * License: MIT
  */
-/*global fn, ux */
+/*global fn, query */
 fn.not = function (selector) {
     if (this.length) {
-        return ux.query(':not(' + selector + ')', this[0]);
+        return query(':not(' + selector + ')', this[0]);
     }
-    return ux.query();
+    return query();
 };

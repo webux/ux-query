@@ -2,10 +2,10 @@
  * Copyright 2013, WebUX
  * License: MIT
  */
-/*global fn, ux */
+/*global fn, query */
 fn.prepend = function (element) {
     if (typeof element === 'string') {
-        element = ux.query(element);
+        element = query(element);
     }
 
     if (element instanceof Array) {
@@ -14,7 +14,7 @@ fn.prepend = function (element) {
         }
     }
 
-    if (element instanceof Element) {
+    if (element instanceof Element || element instanceof Node) {
         this.each(function (index, el) {
             if (el.childNodes.length) {
                 el.insertBefore(element, el.childNodes[0]);

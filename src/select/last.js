@@ -8,10 +8,10 @@ fn.last = function (returnElement) {
         if (returnElement) {
             return this[this.length - 1];
         }
-        return ux.query(this[this.length - 1]);
+        return query(this[this.length - 1]);
     }
     if (returnElement) {
         return null;
     }
-    return ux.query();
+    return query();
 };

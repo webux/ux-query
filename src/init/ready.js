@@ -6,10 +6,10 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  */
-/*global document, ux */
+/*global document, query */
 var callbacks = [];
 
-ux.query.ready = function (callback) {
+query.ready = function (callback) {
     callbacks.push(callback);
 };
 

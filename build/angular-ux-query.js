@@ -81,7 +81,7 @@
     };
     qp.noConflict = function() {
         delete window.$;
-        return ux.query;
+        return query;
     };
     var isDefined = function(val) {
         return val !== undefined;
@@ -101,7 +101,7 @@
         window.$ = query;
     }
     var callbacks = [];
-    ux.query.ready = function(callback) {
+    query.ready = function(callback) {
         callbacks.push(callback);
     };
     var DOMContentLoaded;
@@ -218,14 +218,14 @@
     fn.after = function(content, elements) {};
     fn.append = function(element) {
         if (typeof element === "string") {
-            element = ux.query(element);
+            element = query(element);
         }
         if (element instanceof Array) {
             if (element.length) {
                 element = element[0];
             }
         }
-        if (element instanceof Element) {
+        if (element instanceof Element || element instanceof Node) {
             this.each(function(index, el) {
                 el.appendChild(element);
             });
@@ -250,14 +250,14 @@
     };
     fn.prepend = function(element) {
         if (typeof element === "string") {
-            element = ux.query(element);
+            element = query(element);
         }
         if (element instanceof Array) {
             if (element.length) {
                 element = element[0];
             }
         }
-        if (element instanceof Element) {
+        if (element instanceof Element || element instanceof Node) {
             this.each(function(index, el) {
                 if (el.childNodes.length) {
                     el.insertBefore(element, el.childNodes[0]);
@@ -334,40 +334,49 @@
     fn.children = function() {};
     fn.find = function(selector) {
         if (this.length) {
-            return ux.query(selector, this[0]);
+            return query(selector, this[0]);
         }
-        return ux.query();
+        return query();
     };
     fn.first = function(returnElement) {
         if (this.length) {
             if (returnElement) {
                 return this[0];
             }
-            return ux.query(this[0]);
+            return query(this[0]);
         }
         if (returnElement) {
             return null;
         }
-        return ux.query();
+        return query();
+    };
+    fn.get = function(index) {
+        if (Math.abs(index) < this.length) {
+            if (index < 0) {
+                return this[this.length + index - 1];
+            }
+            return this[index];
+        }
+        return null;
     };
     fn.last = function(returnElement) {
         if (this.length) {
             if (returnElement) {
                 return this[this.length - 1];
             }
-            return ux.query(this[this.length - 1]);
+            return query(this[this.length - 1]);
         }
         if (returnElement) {
             return null;
         }
-        return ux.query();
+        return query();
     };
     fn.next = function() {};
     fn.not = function(selector) {
         if (this.length) {
-            return ux.query(":not(" + selector + ")", this[0]);
+            return query(":not(" + selector + ")", this[0]);
         }
-        return ux.query();
+        return query();
     };
     fn.parent = function(selector) {
         if (this.length) {

@@ -91,7 +91,7 @@ qp.each = function (fn) {
 
 qp.noConflict = function () {
     delete window.$;
-    return ux.query;
+    return query;
 };
 
 // :: helpers ::

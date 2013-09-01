@@ -33,6 +33,7 @@ module.exports = function (grunt) {
                         'src/modify/*.js',
                         'src/mutate/*.js',
                         'src/query/*.js',
+                        'src/select/*.js',
                         'src/event/*.js',
                         'src/subscribe/*.js'
                     ]
@@ -98,6 +99,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
 
     // Default task(s).
-    grunt.registerTask('default', ['jshint', 'uglify', 'compress']);
+//    grunt.registerTask('default', ['jshint', 'uglify', 'compress']);
+    grunt.registerTask('default', ['jshint', 'uglify']);
 
 };
