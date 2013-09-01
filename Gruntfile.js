@@ -27,7 +27,16 @@ module.exports = function (grunt) {
                     wrap: '<%= pkg.packageName %>'
                 },
                 files: {
-                    'build/<%= pkg.filename %>.js': ['src/*.js']
+                    'build/<%= pkg.filename %>.js': [
+                        'src/core.js',
+                        'src/init/*.js',
+                        'src/modify/*.js',
+                        'src/mutate/*.js',
+                        'src/query/*.js',
+                        'src/select/*.js',
+                        'src/subscribe/*.js',
+                        'src/frameworks/*.js',
+                    ]
                 }
             },
             build_min: {
@@ -50,7 +59,16 @@ module.exports = function (grunt) {
                     banner: '<%= banner %>'
                 },
                 files: {
-                    'build/angular-<%= pkg.filename %>.js': ['src/*.js']
+                    'build/angular-<%= pkg.filename %>.js': [
+                        'src/core.js',
+                        'src/init/*.js',
+                        'src/modify/*.js',
+                        'src/mutate/*.js',
+                        'src/query/*.js',
+                        'src/select/*.js',
+                        'src/subscribe/*.js',
+                        'src/frameworks/*.js',
+                    ]
                 }
             },
             build_ng_min: {

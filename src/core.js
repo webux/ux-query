@@ -99,4 +99,4 @@ exports.query = function query(selector, context) {
     return new Query(selector, context);
 };
 
-exports.query.fn = {};
+var fn = exports.query.fn = {};
