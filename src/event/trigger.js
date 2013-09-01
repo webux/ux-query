@@ -22,5 +22,6 @@ fn.trigger = function (eventName, data) {
             el.fireEvent("on" + event.eventType, event);
         }
     });
+    return this;
 };
 

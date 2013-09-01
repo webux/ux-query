@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>get demo</title>
+    <style>
+        * {
+            font-family: Arial, sans;
+        }
+
+        span {
+            color: red;
+        }
+
+        div {
+            background: yellow;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+<span>&nbsp;</span>
+
+<p>In this paragraph is an <span>important</span> section</p>
+
+<div><input type="text"/></div>
+<script>
+    $("*", document.body).click(function (e) {
+        e.stopPropagation();
+        var domEl = $(this).get(0);
+        $("span:first").text("Clicked on - " + domEl.nodeName);
+    });
+</script>
+
+</body>
+</html>

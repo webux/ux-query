@@ -16,4 +16,5 @@ fn.unbind = fn.off = function (event, handler) {
             }
         });
     }
+    return this;
 };

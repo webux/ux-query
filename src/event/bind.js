@@ -20,5 +20,5 @@ fn.bind = fn.on = function (event, handler) {
         }
         el.eventHolder[el.eventHolder.length] = new Array(event, handler);
     });
-
+    return this;
 };

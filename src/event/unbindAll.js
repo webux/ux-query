@@ -25,4 +25,5 @@ fn.unbindAll = function (event) {
             }
         }
     });
+    return this;
 };
