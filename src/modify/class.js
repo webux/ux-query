@@ -4,7 +4,7 @@
  */
 /*global fn */
 fn.addClass = function (className) {
-    this.each(function (el) {
+    this.each(function (index, el) {
         if (!this.hasClass(el, className)) {
             el.className += ' ' + className;
         }
@@ -23,7 +23,7 @@ fn.hasClass = function (className) {
 };
 
 fn.removeClass = function (className) {
-    this.each(function (el) {
+    this.each(function (index, el) {
         var newClass = ' ' + el.className.replace(/[\t\r\n]/g, ' ') + ' ';
         if (this.hasClass(el, className)) {
             while (newClass.indexOf(' ' + className + ' ') >= 0) {

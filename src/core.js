@@ -2,7 +2,7 @@
  * Copyright 2013, WebUX
  * License: MIT
  */
-
+/*global exports, window, ux */
 function Query(selector, context) {
     this.init(selector, context);
 }
@@ -12,12 +12,12 @@ var qp = Query.prototype = Object.create(Array.prototype);
 qp.version = '0.1';
 qp.selector = '';
 
-qp.init = function (selector) {
+qp.init = function (selector, context) {
     if (typeof selector === 'string') {
         if (selector.substr(0, 1) === '<' && selector.substr(selector.length - 1, 1) === '>') {
             this.parseHTML(selector);
         } else {
-            this.parseSelector(selector);
+            this.parseSelector(selector, context);
         }
     } else if (selector instanceof Array) {
         this.parseArray(selector);
@@ -56,7 +56,7 @@ qp.parseSelector = function (selector, context) {
 
 qp.parseArray = function (list) {
     var i = 0,
-    len = list.length;
+        len = list.length;
     this.length = 0;
     while (i < len) {
         if (this[i] instanceof Element) {
@@ -80,7 +80,7 @@ qp.toString = function () {
 qp.each = function (fn) {
     var i = 0, len = this.length, result;
     while (i < len) {
-        result = fn(this[i]);
+        result = fn.apply(this[i], [i, this[i]]);
         if (result === false) {
             break;
         }
@@ -89,7 +89,17 @@ qp.each = function (fn) {
     return this;
 };
 
-exports.query = function query(selector, context) {
+qp.noConflict = function () {
+    delete window.$;
+    return ux.query;
+};
+
+// :: helpers ::
+var isDefined = function(val) {
+    return val !== undefined;
+};
+
+function query(selector, context) {
     for (var n in query.fn) {
         if (query.fn.hasOwnProperty(n)) {
             qp[n] = query.fn[n];
@@ -97,6 +107,11 @@ exports.query = function query(selector, context) {
         }
     }
     return new Query(selector, context);
-};
+}
 
+exports.query = query;
 var fn = exports.query.fn = {};
+
+if(window.$ === undefined) {
+    window.$ = query;
+}

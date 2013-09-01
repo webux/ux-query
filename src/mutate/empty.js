@@ -4,7 +4,7 @@
  */
 /*global fn */
 fn.empty = function () {
-    this.each(function (el) {
+    this.each(function (index, el) {
         el.innerHTML = null;
     });
 };

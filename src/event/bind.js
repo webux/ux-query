@@ -4,7 +4,7 @@
  */
 /*global fn */
 fn.bind = fn.on = function (event, handler) {
-    this.each(function (el) {
+    this.each(function (index, el) {
         if (el.attachEvent) {
             el['e' + event + handler] = handler;
             el[event + handler] = function () {
@@ -20,4 +20,5 @@ fn.bind = fn.on = function (event, handler) {
         }
         el.eventHolder[el.eventHolder.length] = new Array(event, handler);
     });
+
 };

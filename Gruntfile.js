@@ -33,9 +33,8 @@ module.exports = function (grunt) {
                         'src/modify/*.js',
                         'src/mutate/*.js',
                         'src/query/*.js',
-                        'src/select/*.js',
-                        'src/subscribe/*.js',
-                        'src/frameworks/*.js',
+                        'src/event/*.js',
+                        'src/subscribe/*.js'
                     ]
                 }
             },
@@ -66,7 +65,7 @@ module.exports = function (grunt) {
                         'src/mutate/*.js',
                         'src/query/*.js',
                         'src/select/*.js',
-                        'src/subscribe/*.js',
+                        'src/event/*.js',
                         'src/frameworks/*.js',
                     ]
                 }

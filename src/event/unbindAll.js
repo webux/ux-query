@@ -5,7 +5,7 @@
 /*global fn */
 fn.unbindAll = function (event) {
     var scope = this;
-    this.each(function (el) {
+    this.each(function (index, el) {
         if (el.eventHolder) {
             var removed = 0, handler;
             for (var i = 0; i < el.eventHolder.length; i++) {

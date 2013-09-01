@@ -8,7 +8,7 @@ fn.css = function (prop, value) {
     if (this.length) {
         el = this[0];
         if (arguments.length > 1) {
-            this.each(function (el) {
+            this.each(function (index, el) {
                 el.style[prop] = value;
             });
         }

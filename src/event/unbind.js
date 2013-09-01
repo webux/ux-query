@@ -7,7 +7,7 @@ fn.unbind = fn.off = function (event, handler) {
     if (arguments.length === 1) {
         this.unbindAll(event);
     } else {
-        this.each(function (el) {
+        this.each(function (index, el) {
             if (el.detachEvent) {
                 el.detachEvent('on' + event, el[event + handler]);
                 el[event + handler] = null;

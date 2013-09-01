@@ -2,7 +2,7 @@
  * Copyright 2013, WebUX
  * License: MIT
  */
-/*global fn */
+/*global fn, ux */
 fn.append = function (element) {
 
     if (typeof element === 'string') {
@@ -16,7 +16,7 @@ fn.append = function (element) {
     }
 
     if (element instanceof Element) {
-        this.each(function (el) {
+        this.each(function (index, el) {
             el.appendChild(element);
         });
     }

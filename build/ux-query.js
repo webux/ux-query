@@ -11,12 +11,12 @@
     var qp = Query.prototype = Object.create(Array.prototype);
     qp.version = "0.1";
     qp.selector = "";
-    qp.init = function(selector) {
+    qp.init = function(selector, context) {
         if (typeof selector === "string") {
             if (selector.substr(0, 1) === "<" && selector.substr(selector.length - 1, 1) === ">") {
                 this.parseHTML(selector);
             } else {
-                this.parseSelector(selector);
+                this.parseSelector(selector, context);
             }
         } else if (selector instanceof Array) {
             this.parseArray(selector);
@@ -71,7 +71,7 @@
     qp.each = function(fn) {
         var i = 0, len = this.length, result;
         while (i < len) {
-            result = fn(this[i]);
+            result = fn.apply(this[i], [ i, this[i] ]);
             if (result === false) {
                 break;
             }
@@ -79,7 +79,14 @@
         }
         return this;
     };
-    exports.query = function query(selector, context) {
+    qp.noConflict = function() {
+        delete window.$;
+        return ux.query;
+    };
+    var isDefined = function(val) {
+        return val !== undefined;
+    };
+    function query(selector, context) {
         for (var n in query.fn) {
             if (query.fn.hasOwnProperty(n)) {
                 qp[n] = query.fn[n];
@@ -87,8 +94,12 @@
             }
         }
         return new Query(selector, context);
-    };
+    }
+    exports.query = query;
     var fn = exports.query.fn = {};
+    if (window.$ === undefined) {
+        window.$ = query;
+    }
     var callbacks = [];
     ux.query.ready = function(callback) {
         callbacks.push(callback);
@@ -126,14 +137,14 @@
         window.attachEvent("onload", invokeCallbacks);
     }
     fn.removeAttr = function(prop) {
-        this.each(function(el) {
+        this.each(function(index, el) {
             el.removeAttribute(prop);
         });
         return this;
     };
     fn.attr = function(prop, value) {
         if (arguments.length > 2) {
-            this.each(function(el) {
+            this.each(function(index, el) {
                 el.setAttribute(prop, value);
             });
         }
@@ -145,7 +156,7 @@
         return this.attr("data-" + prop, value);
     };
     fn.addClass = function(className) {
-        this.each(function(el) {
+        this.each(function(index, el) {
             if (!this.hasClass(el, className)) {
                 el.className += " " + className;
             }
@@ -162,7 +173,7 @@
         return false;
     };
     fn.removeClass = function(className) {
-        this.each(function(el) {
+        this.each(function(index, el) {
             var newClass = " " + el.className.replace(/[\t\r\n]/g, " ") + " ";
             if (this.hasClass(el, className)) {
                 while (newClass.indexOf(" " + className + " ") >= 0) {
@@ -178,7 +189,7 @@
         if (this.length) {
             el = this[0];
             if (arguments.length > 1) {
-                this.each(function(el) {
+                this.each(function(index, el) {
                     el.style[prop] = value;
                 });
             }
@@ -191,6 +202,19 @@
         }
         return null;
     };
+    fn.prop = function(name, value) {
+        if (this.length) {
+            if (arguments.length > 2) {
+                this[0][name] = value;
+            } else {
+                return this[0][name];
+            }
+        }
+    };
+    fn.is = function(name) {
+        name = name.split(":").join("");
+        return this.prop(name);
+    };
     fn.after = function(content, elements) {};
     fn.append = function(element) {
         if (typeof element === "string") {
@@ -202,14 +226,14 @@
             }
         }
         if (element instanceof Element) {
-            this.each(function(el) {
+            this.each(function(index, el) {
                 el.appendChild(element);
             });
         }
     };
     fn.before = function(content, elements) {};
     fn.empty = function() {
-        this.each(function(el) {
+        this.each(function(index, el) {
             el.innerHTML = null;
         });
     };
@@ -217,7 +241,7 @@
         if (this.length) {
             var el = this[0];
             if (arguments.length > 0) {
-                this.each(function(el) {
+                this.each(function(index, el) {
                     el.innerHTML = val;
                 });
             }
@@ -234,7 +258,7 @@
             }
         }
         if (element instanceof Element) {
-            this.each(function(el) {
+            this.each(function(index, el) {
                 if (el.childNodes.length) {
                     el.insertBefore(element, el.childNodes[0]);
                 } else {
@@ -244,7 +268,7 @@
         }
     };
     fn.remove = function() {
-        this.each(function(el) {
+        this.each(function(index, el) {
             if (el.parentElement) {
                 el.parentElement.removeChild(el);
             }
@@ -254,7 +278,7 @@
         if (this.length) {
             var el = this[0];
             if (arguments.length > 0) {
-                this.each(function(el) {
+                this.each(function(index, el) {
                     el.innerText = val;
                 });
             }
@@ -307,44 +331,8 @@
             }
         }
     };
-    fn.find = function(selector) {
-        if (this.length) {
-            return ux.query(selector, this[0]);
-        }
-        return ux.query();
-    };
-    fn.first = function(returnElement) {
-        if (this.length) {
-            if (returnElement) {
-                return this[0];
-            }
-            return ux.query(this[0]);
-        }
-        if (returnElement) {
-            return null;
-        }
-        return ux.query();
-    };
-    fn.last = function(returnElement) {
-        if (this.length) {
-            if (returnElement) {
-                return this[this.length - 1];
-            }
-            return ux.query(this[this.length - 1]);
-        }
-        if (returnElement) {
-            return null;
-        }
-        return ux.query();
-    };
-    fn.not = function(selector) {
-        if (this.length) {
-            return ux.query(":not(" + selector + ")", this[0]);
-        }
-        return ux.query();
-    };
     fn.bind = fn.on = function(event, handler) {
-        this.each(function(el) {
+        this.each(function(index, el) {
             if (el.attachEvent) {
                 el["e" + event + handler] = handler;
                 el[event + handler] = function() {
@@ -360,11 +348,46 @@
             el.eventHolder[el.eventHolder.length] = new Array(event, handler);
         });
     };
+    fn.change = function(handler) {
+        if (isDefined(handler)) {
+            this.on("change", handler);
+        } else {
+            this.trigger("change");
+        }
+        return this;
+    };
+    fn.click = function(handler) {
+        if (isDefined(handler)) {
+            this.bind("click", handler);
+        } else {
+            this.trigger("click");
+        }
+        return this;
+    };
+    fn.trigger = function(eventName, data) {
+        var event;
+        if (document.createEvent) {
+            event = document.createEvent("HTMLEvents");
+            event.initEvent(eventName, true, true);
+        } else {
+            event = document.createEventObject();
+            event.eventType = eventName;
+        }
+        event.eventName = eventName;
+        event.data = data;
+        this.each(function(index, el) {
+            if (document.createEvent) {
+                el.dispatchEvent(event);
+            } else {
+                el.fireEvent("on" + event.eventType, event);
+            }
+        });
+    };
     fn.unbind = fn.off = function(event, handler) {
         if (arguments.length === 1) {
             this.unbindAll(event);
         } else {
-            this.each(function(el) {
+            this.each(function(index, el) {
                 if (el.detachEvent) {
                     el.detachEvent("on" + event, el[event + handler]);
                     el[event + handler] = null;
@@ -376,7 +399,7 @@
     };
     fn.unbindAll = function(event) {
         var scope = this;
-        this.each(function(el) {
+        this.each(function(index, el) {
             if (el.eventHolder) {
                 var removed = 0, handler;
                 for (var i = 0; i < el.eventHolder.length; i++) {
@@ -397,15 +420,6 @@
             }
         });
     };
-    var module;
-    try {
-        module = angular.module("ux");
-    } catch (e) {
-        module = angular.module("ux", []);
-    }
-    module.factory("$query", function() {
-        return ux.query;
-    });
 })({}, function() {
     return this;
 }());

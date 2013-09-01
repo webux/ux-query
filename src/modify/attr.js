@@ -4,7 +4,7 @@
  */
 /*global fn */
 fn.removeAttr = function (prop) {
-    this.each(function (el) {
+    this.each(function (index, el) {
         el.removeAttribute(prop);
     });
     return this;
@@ -12,7 +12,7 @@ fn.removeAttr = function (prop) {
 
 fn.attr = function (prop, value) {
     if (arguments.length > 2) {
-        this.each(function (el) {
+        this.each(function (index, el) {
             el.setAttribute(prop, value);
         });
     }

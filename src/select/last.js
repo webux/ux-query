@@ -2,7 +2,7 @@
  * Copyright 2013, WebUX
  * License: MIT
  */
-/*global fn */
+/*global fn, ux */
 fn.last = function (returnElement) {
     if (this.length) {
         if (returnElement) {

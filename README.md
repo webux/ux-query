@@ -1,5 +1,7 @@
-Query
+Query (pre-release)
 ========
+
+**Warning: The API and functionality is subject to change**
 
 A very lightweight DOM query selector and modifier (~5Kb minified). Works well as an alternative to heavier DOM selection libraries, such as jQuery, Zepto, HTML.js, Sizzle, and other similar libraries.
 
@@ -7,11 +9,14 @@ A very lightweight DOM query selector and modifier (~5Kb minified). Works well a
 
 **Constructor**
 
-	var queryNodes = ux.query(selector);
+	var queryNodes = $(selector);
 
-**Ready**
+**Core**
 
-	ux.query.ready(handler);	
+- **ready** () - Invoked when DOM is ready
+- **noConflict** () - will remove globally define $.
+- **each** (handler) - loops through selected elements and returns element in handler. 
+
 
 **Selectors**
 
@@ -44,11 +49,15 @@ A very lightweight DOM query selector and modifier (~5Kb minified). Works well a
 - **isChecked** () - Returns boolean if a radio or checkbox type is checked.
 - **val** (value) - Getter /Setter...
 
-**Subscriptions**
+**Events**
 
-- **bind** or **on** (eventType, handler) - Subscribes to a handler to an event on DOM element.
-- **unbind** or **off** (eventType [,handler]) - Unsubscribes a handler or all handlers from a DOM element.
+- **bind** (eventType, handler) - Subscribes to a handler to an event on DOM element.
+- **unbind** (eventType [,handler]) - Unsubscribes a handler or all handlers from a DOM element.
 - **unbindAll** () - Unsubscribes all events handler from all events on a DOM element.
+- **on** (eventType, handler) - Alias to *bind()*.
+- **off** (eventType, handler) - Alias to *unbind()*.
+- **trigger** (eventType) - Invokes an event on selected elements.
+
 
 Angular Development
 --------

@@ -2,7 +2,7 @@
  * Copyright 2013, WebUX
  * License: MIT
  */
-/*global fn */
+/*global fn, ux */
 fn.prepend = function (element) {
     if (typeof element === 'string') {
         element = ux.query(element);
@@ -15,7 +15,7 @@ fn.prepend = function (element) {
     }
 
     if (element instanceof Element) {
-        this.each(function (el) {
+        this.each(function (index, el) {
             if (el.childNodes.length) {
                 el.insertBefore(element, el.childNodes[0]);
             } else {

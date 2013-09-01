@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>parent demo</title>
+    <style>
+        * {
+            font-family: Arial, sans;
+        }
+
+        div, p {
+            margin: 10px;
+        }
+    </style>
+    <!--<script src="../build/ux-query.js"></script>-->
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+<div>div,
+    <span>span, </span>
+    <b>b </b>
+
+</div>
+<p>p,
+    <span>span,
+      <em>em </em>
+    </span>
+</p>
+
+<div>div,
+    <strong>strong,
+        <span>span, </span>
+        <em>em,
+            <b>b, </b>
+        </em>
+
+    </strong>
+    <b>b </b>
+</div>
+<script>
+    $("*", document.body).each(function (index, el) {
+        console.log('el', this);
+//        var parentTag = $(this).parent().get(0).tagName;
+//        $(this).prepend(document.createTextNode(parentTag + " > "));
+    });
+</script>
+
+</body>
+</html>
