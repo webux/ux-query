@@ -49,48 +49,6 @@ module.exports = function (grunt) {
                 files: {
                     'build/<%= pkg.filename %>.min.js': ['build/<%= pkg.filename %>.js']
                 }
-            },
-            build_ng: {
-                options: {
-                    mangle: false,
-                    compress: false,
-                    preserveComments: 'some',
-                    beautify: true,
-                    wrap: '<%= pkg.packageName %>',
-                    banner: '<%= banner %>'
-                },
-                files: {
-                    'build/angular-<%= pkg.filename %>.js': [
-                        'src/core.js',
-                        'src/init/*.js',
-                        'src/measure/*.js',
-                        'src/modify/*.js',
-                        'src/mutate/*.js',
-                        'src/query/*.js',
-                        'src/select/*.js',
-                        'src/event/*.js',
-                        'src/frameworks/*.js',
-                    ]
-                }
-            },
-            build_ng_min: {
-                options: {
-                    report: 'gzip',
-                    banner: '<%= banner %>'
-                },
-                files: {
-                    'build/angular-<%= pkg.filename %>.min.js': ['build/angular-<%= pkg.filename %>.js']
-                }
-            }
-        },
-        compress: {
-            main: {
-                options: {
-                    mode: 'gzip'
-                },
-                expand: true,
-                src: ['build/<%= pkg.filename %>.js'],
-                dest: ''
             }
         }
     });
@@ -98,7 +56,6 @@ module.exports = function (grunt) {
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-compress');
 
     // Default task(s).
 //    grunt.registerTask('default', ['jshint', 'uglify', 'compress']);
