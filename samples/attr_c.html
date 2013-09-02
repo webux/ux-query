@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>attr demo</title>
+    <style>
+        * {
+            font-family: Arial, sans;
+        }
+
+        div {
+            color: blue;
+        }
+
+        span {
+            color: red;
+        }
+
+        b {
+            font-weight: bolder;
+        }
+    </style>
+    <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+    <script src="../build/ux-query.js"></script>
+</head>
+<body>
+
+<div>Zero-th <span></span></div>
+<div>First <span></span></div>
+<div>Second <span></span></div>
+
+<script>
+    $("div")
+            .attr("id", function (arr) {
+                return "div-id" + arr;
+            })
+            .each(function () {
+                $("span", this).html("(id = '<b>" + this.id + "</b>')");
+            });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>get demo</title>
+    <style>
+        * {
+            font-family: Arial, sans;
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+Reversed - <span></span>
+
+<div>One</div>
+<div>Two</div>
+<div>Three</div>
+<script>
+    function disp(divs) {
+        var a = [];
+        for (var i = 0; i < divs.length; i++) {
+            a.push(divs[i].innerHTML);
+        }
+        $("span").text(a.join(" "));
+    }
+    disp($("div").get().reverse());
+</script>
+
+</body>
+</html>

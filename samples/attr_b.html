@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>attr demo</title>
+    <style>
+        * {
+            font-family: Arial, sans;
+        }
+
+        img {
+            padding: 10px;
+        }
+
+        div {
+            color: red;
+            font-size: 24px;
+        }
+    </style>
+    <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+    <script src="../build/ux-query.js"></script>
+</head>
+<body>
+
+<img>
+<img>
+<img>
+
+<div><b>Attribute of Ajax</b></div>
+
+<script>
+    console.log('whois', $('img'));
+    $("img").attr({
+        src: "img/hat.gif",
+        title: "jQuery",
+        alt: "jQuery Logo"
+    });
+    $("div").text($("img").attr("alt"));
+</script>
+
+</body>
+</html>

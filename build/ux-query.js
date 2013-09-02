@@ -143,10 +143,28 @@
         return this;
     };
     fn.attr = function(prop, value) {
-        if (arguments.length > 2) {
+        if (arguments.length === 2) {
+            if (typeof value === "function") {
+                this.each(function(index, el) {
+                    var result = value.apply(el, [ index, prop ]);
+                    this.setAttribute(prop, result);
+                });
+            } else {
+                this.each(function(index, el) {
+                    el.setAttribute(prop, value);
+                });
+            }
+            return this;
+        }
+        if (typeof prop === "object") {
             this.each(function(index, el) {
-                el.setAttribute(prop, value);
+                for (var n in prop) {
+                    if (prop.hasOwnProperty(n)) {
+                        el.setAttribute(n, prop[n]);
+                    }
+                }
             });
+            return this;
         }
         if (this.length) {
             return this[0].getAttribute(prop);
@@ -351,13 +369,16 @@
         return query();
     };
     fn.get = function(index) {
-        if (Math.abs(index) < this.length) {
-            if (index < 0) {
-                return this[this.length + index - 1];
+        if (isDefined(index)) {
+            if (Math.abs(index) < this.length) {
+                if (index < 0) {
+                    return this[this.length + index - 1];
+                }
+                return this[index];
             }
-            return this[index];
+            return null;
         }
-        return null;
+        return [].concat(this);
     };
     fn.last = function(returnElement) {
         if (this.length) {
@@ -407,6 +428,7 @@
             }
             el.eventHolder[el.eventHolder.length] = new Array(event, handler);
         });
+        return this;
     };
     fn.change = function(handler) {
         if (isDefined(handler)) {
@@ -442,6 +464,7 @@
                 el.fireEvent("on" + event.eventType, event);
             }
         });
+        return this;
     };
     fn.unbind = fn.off = function(event, handler) {
         if (arguments.length === 1) {
@@ -456,6 +479,7 @@
                 }
             });
         }
+        return this;
     };
     fn.unbindAll = function(event) {
         var scope = this;
@@ -479,6 +503,7 @@
                 }
             }
         });
+        return this;
     };
 })({}, function() {
     return this;
