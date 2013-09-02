@@ -30,6 +30,7 @@ module.exports = function (grunt) {
                     'build/<%= pkg.filename %>.js': [
                         'src/core.js',
                         'src/init/*.js',
+                        'src/measure/*.js',
                         'src/modify/*.js',
                         'src/mutate/*.js',
                         'src/query/*.js',
@@ -62,6 +63,7 @@ module.exports = function (grunt) {
                     'build/angular-<%= pkg.filename %>.js': [
                         'src/core.js',
                         'src/init/*.js',
+                        'src/measure/*.js',
                         'src/modify/*.js',
                         'src/mutate/*.js',
                         'src/query/*.js',

@@ -136,6 +136,24 @@
         document.attachEvent("onreadystatechange", DOMContentLoaded);
         window.attachEvent("onload", invokeCallbacks);
     }
+    fn.height = function() {
+        return this.css("height");
+    };
+    fn.innerHeight = function() {
+        return this.css("innerHeight");
+    };
+    fn.innerWidth = function() {
+        return this.css("innerWidth");
+    };
+    fn.outerHeight = function() {
+        return this.css("outerHeight");
+    };
+    fn.outerWidth = function() {
+        return this.css("outerWidth");
+    };
+    fn.width = function() {
+        return this.css("width");
+    };
     fn.removeAttr = function(prop) {
         this.each(function(index, el) {
             el.removeAttribute(prop);
