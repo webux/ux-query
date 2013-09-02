@@ -3,7 +3,7 @@ Query (pre-release)
 
 **Warning: The API and functionality is subject to change**
 
-A very lightweight DOM query selector and modifier (~5Kb minified). Works well as an alternative to heavier DOM selection libraries, such as jQuery, Zepto, HTML.js, Sizzle, and other similar libraries.
+A very lightweight DOM query selector and modifier (~7Kb minified). Works well as an alternative to heavier DOM selection libraries, such as jQuery, Zepto, HTML.js, Sizzle, and other similar libraries.
 
 ## API Reference ##
 

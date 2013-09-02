@@ -12,7 +12,8 @@
             color: red;
         }
     </style>
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+    <script src="../build/ux-query.js"></script>
 </head>
 <body>
 Reversed - <span></span>
@@ -22,6 +23,7 @@ Reversed - <span></span>
 <div>Three</div>
 <script>
     function disp(divs) {
+        console.log('divs', divs);
         var a = [];
         for (var i = 0; i < divs.length; i++) {
             a.push(divs[i].innerHTML);

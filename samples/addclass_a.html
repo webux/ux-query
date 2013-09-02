@@ -2,33 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>attr demo</title>
+    <title>addClass demo</title>
     <style>
         * {
             font-family: Arial, sans;
         }
 
-        em {
-            color: blue;
-            font-weight: bold;
+        p {
+            margin: 8px;
+            font-size: 16px;
         }
 
-        div {
-            color: red;
+        .selected {
+            color: blue;
+        }
+
+        .highlight {
+            background: yellow;
         }
     </style>
     <script src="../build/ux-query.js"></script>
 </head>
 <body>
 
-<p>Once there was a <em title="huge, gigantic">large</em> dinosaur...</p>
+<p>Hello</p>
 
-The title of the emphasis is:
-<div></div>
+<p>and</p>
+
+<p>Goodbye</p>
 
 <script>
-    var title = $("em").attr("title");
-    $("div").text(title);
+    $("p").last().addClass("selected");
 </script>
 
 </body>

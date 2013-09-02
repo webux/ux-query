@@ -11,7 +11,7 @@ fn.get = function (index) {
             }
             return this[index];
         }
-        return null;
+        return this;
     }
-    return [].concat(this);
+    return this.splice(0);
 };

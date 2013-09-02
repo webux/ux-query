@@ -81,11 +81,11 @@
     };
     qp.noConflict = function() {
         delete window.$;
-        return query;
+        return ux.query;
     };
-    var isDefined = function(val) {
+    function isDefined(val) {
         return val !== undefined;
-    };
+    }
     function query(selector, context) {
         for (var n in query.fn) {
             if (query.fn.hasOwnProperty(n)) {
@@ -174,8 +174,9 @@
         return this.attr("data-" + prop, value);
     };
     fn.addClass = function(className) {
+        var scope = this;
         this.each(function(index, el) {
-            if (!this.hasClass(el, className)) {
+            if (!scope.hasClass(el, className)) {
                 el.className += " " + className;
             }
         });
@@ -191,19 +192,24 @@
         return false;
     };
     fn.removeClass = function(className) {
+        var scope = this;
         this.each(function(index, el) {
-            var newClass = " " + el.className.replace(/[\t\r\n]/g, " ") + " ";
-            if (this.hasClass(el, className)) {
-                while (newClass.indexOf(" " + className + " ") >= 0) {
-                    newClass = newClass.replace(" " + className + " ", " ");
+            if (isDefined(className)) {
+                var newClass = " " + el.className.replace(/[\t\r\n]/g, " ") + " ";
+                if (scope.hasClass(el, className)) {
+                    while (newClass.indexOf(" " + className + " ") >= 0) {
+                        newClass = newClass.replace(" " + className + " ", " ");
+                    }
+                    el.className = newClass.replace(/^\s+|\s+$/g, "");
                 }
-                el.className = newClass.replace(/^\s+|\s+$/g, "");
+            } else {
+                el.className = "";
             }
         });
         return this;
     };
     fn.css = function(prop, value) {
-        var el, styleValue;
+        var el, returnValue;
         if (this.length) {
             el = this[0];
             if (arguments.length > 1) {
@@ -211,12 +217,28 @@
                     el.style[prop] = value;
                 });
             }
-            if (el.currentStyle) {
-                styleValue = el.currentStyle[prop];
-            } else if (window.getComputedStyle) {
-                styleValue = document.defaultView.getComputedStyle(el[0], null).getPropertyValue(prop);
+            if (prop instanceof Array) {
+                var i = 0, len = prop.length;
+                returnValue = {};
+                if (el.currentStyle) {
+                    while (i < len) {
+                        returnValue[prop[i]] = el.currentStyle[prop[i]];
+                        i += 1;
+                    }
+                } else if (window.getComputedStyle) {
+                    while (i < len) {
+                        returnValue[prop[i]] = document.defaultView.getComputedStyle(el, null).getPropertyValue(prop[i]);
+                        i += 1;
+                    }
+                }
+            } else {
+                if (el.currentStyle) {
+                    returnValue = el.currentStyle[prop];
+                } else if (window.getComputedStyle) {
+                    returnValue = document.defaultView.getComputedStyle(el, null).getPropertyValue(prop);
+                }
             }
-            return styleValue;
+            return returnValue;
         }
         return null;
     };
@@ -376,9 +398,9 @@
                 }
                 return this[index];
             }
-            return null;
+            return this;
         }
-        return [].concat(this);
+        return this.splice(0);
     };
     fn.last = function(returnElement) {
         if (this.length) {

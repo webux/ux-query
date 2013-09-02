@@ -91,13 +91,13 @@ qp.each = function (fn) {
 
 qp.noConflict = function () {
     delete window.$;
-    return query;
+    return ux.query;
 };
 
 // :: helpers ::
-var isDefined = function(val) {
+function isDefined(val){
     return val !== undefined;
-};
+}
 
 function query(selector, context) {
     for (var n in query.fn) {
