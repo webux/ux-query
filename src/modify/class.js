@@ -14,11 +14,11 @@ fn.addClass = function (className) {
 };
 
 fn.hasClass = function (className) {
-    var el;
-    if (this.length) {
-        el = this[0];
-        var elClasses = ' ' + el.className + ' ';
-        return (elClasses.indexOf(className) >= 0);
+    var el = this[0];
+    if (el.classList) {
+        return el.classList.contains(className);
+    } else {
+        return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
     }
     return false;
 };

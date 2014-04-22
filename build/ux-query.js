@@ -1,6 +1,6 @@
 /*
 * uxQuery v.0.1.0
-* (c) 2013, WebUX
+* (c) 2014, WebUX
 * License: MIT.
 */
 (function(exports, global) {
@@ -145,6 +145,11 @@
     fn.innerWidth = function() {
         return this.css("innerWidth");
     };
+    fn.offset = function() {
+        if (this.length) {
+            return this[0].getBoundingClientRect();
+        }
+    };
     fn.outerHeight = function() {
         return this.css("outerHeight");
     };
@@ -201,11 +206,11 @@
         return this;
     };
     fn.hasClass = function(className) {
-        var el;
-        if (this.length) {
-            el = this[0];
-            var elClasses = " " + el.className + " ";
-            return elClasses.indexOf(className) >= 0;
+        var el = this[0];
+        if (el.classList) {
+            return el.classList.contains(className);
+        } else {
+            return new RegExp("(^| )" + className + "( |$)", "gi").test(el.className);
         }
         return false;
     };
@@ -359,7 +364,7 @@
             if (el.offsetWidth === 0 || el.offsetHeight === 0) {
                 return false;
             }
-            if (this.css(el, "opacity") === 0 || this.css(el, "display") === "none" || this.css("visibility", "hidden")) {
+            if (this.css(el, "opacity") === 0 || this.css(el, "display") === "none" || this.css("visibility") === "hidden") {
                 return false;
             }
             return true;
