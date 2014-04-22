@@ -18,7 +18,7 @@ fn.isVisible = function () {
         }
 
         // Return false if our element is invisible
-        if (this.css(el, 'opacity') === 0 || this.css(el, 'display') === 'none' || this.css('visibility', 'hidden')) {
+        if (this.css(el, 'opacity') === 0 || this.css(el, 'display') === 'none' || this.css('visibility') === 'hidden') {
             return false;
         }
 
